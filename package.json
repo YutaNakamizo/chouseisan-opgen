@@ -150,6 +150,14 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      [ "module:babel-root-import", {
+        "rootPathSuffix": "src"
+      }]
     ]
+  },
+  "devDependencies": {
+    "babel-root-import": "^4.1.8"
   }
 }
