@@ -368,6 +368,7 @@ function App() {
                 &copy; {(new Date()).getFullYear()}&nbsp;
                 <Link
                   href="https://ggtk.app"
+                  target="_blanK"
                   color="inherit"
                 >
                   Stardust Sorcery
@@ -375,6 +376,7 @@ function App() {
                 &nbsp;/&nbsp;
                 <Link
                   href="https://ggtk.dev"
+                  target="_blanK"
                   color="inherit"
                 >
                   Yuta NAKAMIZO
@@ -389,12 +391,14 @@ function App() {
               >
                 <Link
                   href="https://chouseisan.com"
+                  target="_blanK"
                 >
                   調整さん
                 </Link>
                 &nbsp;|&nbsp;
                 <Link
                   href="https://github.com/YutaNakamizo/chouseisan-opgen"
+                  target="_blanK"
                 >
                   GitHub
                 </Link>
