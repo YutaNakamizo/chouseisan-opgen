@@ -92,6 +92,7 @@ export const StepPresets = ({
             onDelete={() => {
               handleDelete(index);
             }}
+            key={index}
           />
         ))}
       </List>

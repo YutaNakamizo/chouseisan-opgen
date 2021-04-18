@@ -78,6 +78,7 @@ export const StepPresetsOption = ({
         >
           <Checkbox
             edge="start"
+            color="primary"
             checked={enabled}
             onClick={e => {
               onChange(!enabled);
