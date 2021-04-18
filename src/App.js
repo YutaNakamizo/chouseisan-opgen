@@ -9,7 +9,7 @@ import {
   Box,
   Typography,
   Button,
-  IconButton,
+  Link,
 } from '@material-ui/core';
 import * as colors from '@material-ui/core/colors';
 import '@fontsource/roboto';
@@ -22,6 +22,7 @@ import { Main } from '~/components/Main';
 import { StepDate } from '~/components/StepDate';
 import { StepPresets } from '~/components/StepPresets';
 import { OutputArea } from '~/components/OutputArea';
+import { Footer } from '~/components/Footer';
 
 const saveDailyOptions = options => {
   const _options = [];
@@ -351,6 +352,50 @@ function App() {
               </Box>
             </Box>
           </Box>
+
+          <Footer
+          >
+            <Box
+            >
+              <Typography
+                variant="caption"
+              >
+                &copy; {(new Date()).getFullYear()}&nbsp;
+                <Link
+                  href="https://ggtk.app"
+                  color="inherit"
+                >
+                  Stardust Sorcery
+                </Link>
+                &nbsp;/&nbsp;
+                <Link
+                  href="https://ggtk.dev"
+                  color="inherit"
+                >
+                  Yuta NAKAMIZO
+                </Link>
+              </Typography>
+            </Box>
+            
+            <Box
+            >
+              <Typography
+                variant="caption"
+              >
+                <Link
+                  href="https://chouseisan.com"
+                >
+                  調整さん
+                </Link>
+                &nbsp;|&nbsp;
+                <Link
+                  href="https://github.com/YutaNakamizo/chouseisan-opgen"
+                >
+                  GitHub
+                </Link>
+              </Typography>
+            </Box>
+          </Footer>
         </Main>
       </div>
     </ThemeProvider>
