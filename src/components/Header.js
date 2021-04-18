@@ -22,7 +22,7 @@ export const Header = ({
             variant="h6"
             component="h1"
           >
-            調整さん 文字列生成
+            調整さん候補生成機
           </Typography>
         </Box>
 
