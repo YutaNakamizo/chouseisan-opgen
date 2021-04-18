@@ -20,7 +20,8 @@ export const Footer = ({
   return (
     <Box
       component="footer"
-      mt={2}
+      mt={6}
+      mb={6}
       p={1}
       className={classes.root}
       {...props}
