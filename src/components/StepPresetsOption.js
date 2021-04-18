@@ -59,6 +59,7 @@ export const StepPresetsOption = ({
   onStartTimeChange = function() {},
   onEndTimeChange = function() {},
   onChange = function() {},
+  onDelete = function() {},
   ...props
 }) => {
   const startTimePickerRef = useRef();
@@ -71,6 +72,7 @@ export const StepPresetsOption = ({
       locale={jaLocale}
     >
       <ListItem
+        dense
       >
         <ListItemIcon
         >
@@ -157,6 +159,7 @@ export const StepPresetsOption = ({
         >
           <IconButton
             edge="end"
+            onClick={onDelete}
           >
             <DeleteOutlineIcon
             />

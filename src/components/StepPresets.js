@@ -48,6 +48,14 @@ export const StepPresets = ({
     };
     onChange(_options);  
   };
+
+  const handleDelete = index => {
+    const _options = [
+      ...options,
+    ];
+    _options.splice(index, 1);
+    onChange(_options);
+  };
   
   return (
     <List
@@ -63,6 +71,9 @@ export const StepPresets = ({
           }}
           onChange={value => {
             handleChange(index, value);
+          }}
+          onDelete={() => {
+            handleDelete(index);
           }}
         />
       ))}

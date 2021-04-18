@@ -28,10 +28,25 @@ function App() {
     startTime: new Date(1970, 0, 1, 10, 30),
     endTime: new Date(1970, 0, 1, 12, 0),
     enabled: true,
+  }, {
+    startTime: new Date(1970, 0, 1, 13, 30),
+    endTime: new Date(1970, 0, 1, 15, 0),
+    enabled: true,
+  }, {
+    startTime: new Date(1970, 0, 1, 15, 10),
+    endTime: new Date(1970, 0, 1, 16, 40),
+    enabled: true,
+  }, {
+    startTime: new Date(1970, 0, 1, 16, 50),
+    endTime: new Date(1970, 0, 1, 18, 20),
+    enabled: true,
   }]);
   const [ text, setText ] = useState('');
 
   const handleDailyOptionChange = options => {
+    options.sort((a, b) => {
+      return a.startTime.getTime() - b.startTime.getTime();
+    });
     console.log(options);
     setDailyOptions(options);
   };
