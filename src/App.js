@@ -201,7 +201,6 @@ function App() {
     >
       <div className="App">
         <Header
-          onGenerateClick={generate}
         />
 
         <Main

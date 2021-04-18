@@ -4,11 +4,9 @@ import {
   Toolbar,
   Box,
   Typography,
-  Button,
 } from '@material-ui/core';
 
 export const Header = ({
-  onGenerateClick = function() {},
   ...props
 }) => {
   return (
@@ -35,13 +33,6 @@ export const Header = ({
 
         <Box
         >
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={onGenerateClick}
-          >
-            日程を生成
-          </Button>
         </Box>
       </Toolbar>
     </AppBar>
