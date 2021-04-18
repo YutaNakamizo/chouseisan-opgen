@@ -30,6 +30,10 @@ export const StepPresets = ({
     _options[index] = {
       ...options[index],
       startTime: value,
+      endTime: new Date(
+        value.getTime()
+        + (options[index].endTime.getTime() - options[index].startTime.getTime())
+      ),
     };
     onChange(_options); 
   };
