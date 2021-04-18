@@ -119,7 +119,7 @@ export const StepPresetsOption = ({
                   className={classes.timePicker}
                 />
               </Box>
-              〜
+              -
               <Box
                 className={classes.timeWrap}
               >

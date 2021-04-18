@@ -81,6 +81,10 @@ const theme = createMuiTheme({
   },
 });
 
+const formatDate2Time = date => {
+  return `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`;
+};
+
 function App() {
   const [ dailyOptions, setDailyOptions ] = useState();
   useEffect(() => {
@@ -122,13 +126,13 @@ function App() {
       endDateRef.current.getDate()
     );
 
-    const bucketTimes = [
-      '10:30 - 12:00',
-      '13:30 - 15:00',
-      '15:10 - 16:40',
-      '16:50 - 18:20',
-      '18:30 - 20:00',
-    ];
+    const bucketTimes = [];
+    for(const option of dailyOptions) {
+      if(!option.enabled) continue;
+      bucketTimes.push(
+        `${formatDate2Time(option.startTime)} - ${formatDate2Time(option.endTime)}`
+      );
+    }
 
     const buckets = [];
     const numDays = (endDate - startDate) / 86400000 + 1;
