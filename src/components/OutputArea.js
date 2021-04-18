@@ -14,6 +14,8 @@ export const OutputArea = ({
       <TextField
         multiline
         value={text}
+        fullWidth
+        {...props}
       />
     </Box>
   );

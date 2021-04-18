@@ -70,6 +70,7 @@ export const StepDate = ({
               setStartDate(date);
               onSDateChange(date);
             }}
+            fullWidth
           />
         </Box>
 
@@ -89,6 +90,7 @@ export const StepDate = ({
               setEndDate(date);
               onEDateChange(date);
             }}
+            fullWidth
           />
         </Box>
       </Box>
