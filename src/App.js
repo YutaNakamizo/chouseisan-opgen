@@ -1,6 +1,7 @@
 import {
   useState,
   useRef,
+  useEffect,
 } from 'react';
 import {
   createMuiTheme,
@@ -15,6 +16,63 @@ import { StepDate } from '~/components/StepDate';
 import { StepPresets } from '~/components/StepPresets';
 import { OutputArea } from '~/components/OutputArea';
 
+const saveDailyOptions = options => {
+  const _options = [];
+  for(const option of options) {
+    _options.push({
+      ...option,
+      startTime: option.startTime.getTime(),
+      endTime: option.endTime.getTime(),
+    });
+  }
+  window.localStorage.setItem(
+    'app.ggtk.chouseisan-opgen/daily_options',
+    JSON.stringify(_options)
+  );
+};
+
+const loadDailyOptions = () => {
+  const localDailyOptionsStr = window.localStorage.getItem('app.ggtk.chouseisan-opgen/daily_options');
+  if(!localDailyOptionsStr) {
+    const defaultOptions = [
+      {
+        startTime: new Date(1970, 0, 1, 10, 30),
+        endTime: new Date(1970, 0, 1, 12, 0),
+        enabled: true,
+      }, {
+        startTime: new Date(1970, 0, 1, 13, 30),
+        endTime: new Date(1970, 0, 1, 15, 0),
+        enabled: true,
+      }, {
+        startTime: new Date(1970, 0, 1, 15, 10),
+        endTime: new Date(1970, 0, 1, 16, 40),
+        enabled: true,
+      }, {
+        startTime: new Date(1970, 0, 1, 16, 50),
+        endTime: new Date(1970, 0, 1, 18, 20),
+        enabled: true,
+      }, {
+        startTime: new Date(1970, 0, 1, 18, 30),
+        endTime: new Date(1970, 0, 1, 20, 0),
+        enabled: true,
+      }
+    ];
+    saveDailyOptions(defaultOptions);
+    return defaultOptions;
+  }
+
+  const localDailyOptionsParse = JSON.parse(localDailyOptionsStr.split(','));
+  const _options = [];
+  for(const option of localDailyOptionsParse) {
+    _options.push({
+      ...option,
+      startTime: new Date(option.startTime),
+      endTime: new Date(option.endTime),
+    });
+  }
+  return _options;
+};
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -24,23 +82,12 @@ const theme = createMuiTheme({
 });
 
 function App() {
-  const [ dailyOptions, setDailyOptions ] = useState([{
-    startTime: new Date(1970, 0, 1, 10, 30),
-    endTime: new Date(1970, 0, 1, 12, 0),
-    enabled: true,
-  }, {
-    startTime: new Date(1970, 0, 1, 13, 30),
-    endTime: new Date(1970, 0, 1, 15, 0),
-    enabled: true,
-  }, {
-    startTime: new Date(1970, 0, 1, 15, 10),
-    endTime: new Date(1970, 0, 1, 16, 40),
-    enabled: true,
-  }, {
-    startTime: new Date(1970, 0, 1, 16, 50),
-    endTime: new Date(1970, 0, 1, 18, 20),
-    enabled: true,
-  }]);
+  const [ dailyOptions, setDailyOptions ] = useState();
+  useEffect(() => {
+    const _options = loadDailyOptions();
+    setDailyOptions(_options);
+  }, []);
+
   const [ text, setText ] = useState('');
 
   const handleDailyOptionChange = options => {
@@ -49,6 +96,7 @@ function App() {
     });
     console.log(options);
     setDailyOptions(options);
+    saveDailyOptions(options);
   };
 
   const startDateRef = useRef();
