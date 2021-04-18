@@ -23,6 +23,7 @@ import { StepDate } from '~/components/StepDate';
 import { StepPresets } from '~/components/StepPresets';
 import { OutputArea } from '~/components/OutputArea';
 import { Footer } from '~/components/Footer';
+import { CopyNotif } from '~/components/CopyNotif';
 
 const saveDailyOptions = options => {
   const _options = [];
@@ -167,6 +168,7 @@ function App() {
     copy(result);
   };
 
+  const [ copyNotifOpen, setCopyNotifOpen ] = useState(false);
   const copy = text => {
     const listener = e => {
       e.clipboardData.setData('text/plain' , text);    
@@ -176,6 +178,10 @@ function App() {
     document.addEventListener('copy' , listener);
     document.execCommand('copy');
     document.removeEventListener('copy', listener);
+    setCopyNotifOpen(true);
+  };
+  const handleCopyNotifClose = () => {
+    setCopyNotifOpen(false);
   };
 
 
@@ -397,6 +403,11 @@ function App() {
           </Footer>
         </Main>
       </div>
+
+      <CopyNotif
+        open={copyNotifOpen}
+        onClose={handleCopyNotifClose}
+      />
     </ThemeProvider>
   );
 }
