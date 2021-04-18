@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
+  <head
+    prefix="og: http://ogp.me/ns#"
+  >
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-
     <meta name="theme-color" content="#000000" />
 
+    <meta name="og:url" content="https://chouseisan-opgen.ggtk.app">
+
+    <meta name="og:title" content="調整さん候補生成機">
+    <title>調整さん候補生成機</title>
+
+    <meta
+      name="og:description"
+      content='日程調整サービス "調整さん" の候補日時を簡単に生成できる Web アプリケーションです. 同じ時間帯の候補を複数日に渡って調整したいときに便利です.'
+    >
     <meta
       name="description"
       content='日程調整サービス "調整さん" の候補日時を簡単に生成できる Web アプリケーションです. 同じ時間帯の候補を複数日に渡って調整したいときに便利です.'
@@ -18,9 +26,16 @@
       name="keywords"
       content="調整さん 日程調整 候補日時 日程候補"
     >
+
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <meta name="og:image" content="%PUBLIC_URL%/logo512.png">
+    <meta name="twitter:card" content="summary">
+
+    <meta name="twitter:site" content="@TakumaNitori">
+    <meta name="twitter:creator" content="@TakumaNitori">
     
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>調整さん候補生成機</title>
   </head>
   <body>
     <noscript>Web ブラウザの設定から JavaScript を有効にし, 再度アクセスしてください.</noscript>
