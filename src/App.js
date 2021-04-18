@@ -6,9 +6,16 @@ import {
 import {
   createMuiTheme,
   ThemeProvider,
+  Box,
+  Typography,
+  Button,
+  IconButton,
 } from '@material-ui/core';
 import * as colors from '@material-ui/core/colors';
 import '@fontsource/roboto';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 
 import { Header } from '~/components/Header';
 import { Main } from '~/components/Main';
@@ -83,6 +90,10 @@ const theme = createMuiTheme({
 
 const formatDate2Time = date => {
   return `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`;
+};
+
+const getIsMobile = () => {
+  return document.body.clientWidth < 896;
 };
 
 function App() {
@@ -166,6 +177,23 @@ function App() {
     document.removeEventListener('copy', listener);
   };
 
+
+  // Switch UI for mobile
+  const [ isMobile, setIsMobile ] = useState(
+    document.body.clientWidth <= 768
+  );
+
+  useEffect(() => {
+    const onResize = () => {
+      setIsMobile(getIsMobile());
+    };
+
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+    };
+  }, []);
+
   return (
     <ThemeProvider
       theme={theme}
@@ -177,19 +205,152 @@ function App() {
 
         <Main
         >
-          <StepPresets
-            options={dailyOptions}
-            onChange={handleDailyOptionChange}
-          />
+          <Box
+            display="flex"
+            flexDirection={isMobile ? 'column' : 'row'}
+            justifyContent={isMobile ? 'flex-start' : 'center'}
+            alignItems={isMobile ? 'center' : 'flex-start'}
+            mt={2}
+            mb={6}
+          >
+            <Box
+              flexGrow={1}
+              width={isMobile ? '100%' : 'auto'}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+            >
+              <Box
+                width="100%"
+              >
+                <Typography
+                  variant="h6"
+                  component="h2"
+                >
+                  時間帯を選択
+                </Typography>
+                <StepPresets
+                  options={dailyOptions}
+                  onChange={handleDailyOptionChange}
+                />
+              </Box>
 
-          <StepDate
-            onSDateChange={handleSDateChange}
-            onEDateChange={handleEDateChange}
-          />
+              <Box
+                mt={2}
+                mb={2}
+                style={{
+                  display: isMobile ? 'inherit' : 'none',
+                }}
+              >
+                <ExpandMoreIcon
+                />
+              </Box>
 
-          <OutputArea
-            text={text}
-          />
+
+            </Box>
+
+            <Box
+              flexGrow={1}
+              display="flex"
+              flexDirection={isMobile ? 'column' : 'row'}
+              justifyContent="center"
+              alignItems="center"
+              width={isMobile ? '100%' : 'auto'}
+            >
+              <Box
+                ml={2}
+                mr={2}
+                style={{
+                  display: isMobile ? 'none' : 'inherit',
+                }}
+              >
+                <ChevronRightIcon
+                />
+              </Box>
+
+              <Box
+                flexGrow={1}
+                width={isMobile ? '100%' : 'auto'}
+              >
+                <Typography
+                  variant="h6"
+                  component="h2"
+                >
+                  期間を設定
+                </Typography>
+                <StepDate
+                  onSDateChange={handleSDateChange}
+                  onEDateChange={handleEDateChange}
+                />
+              </Box>
+
+              <Box
+                ml={isMobile ? 0 : 2}
+                mr={isMobile ? 0 : 2}
+                mt={isMobile ? 2 : 0}
+                mb={isMobile ? 2 : 0}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  endIcon={
+                    isMobile ? (
+                      <ExpandMoreIcon
+                      />
+                    ) : (
+                      <ChevronRightIcon
+                      />
+                    )
+                  }
+                  onClick={generate}
+                >
+                  {isMobile ? '日程を生成' : '生成'}
+                </Button>
+              </Box>
+            </Box>
+
+            <Box
+              flexGrow={1}
+              width={isMobile ? '100%' : 'auto'}
+              display="flex"
+              flexDirection={isMobile ? 'row' : 'column'}
+            >
+              <Box
+                flexGrow={1}
+              >
+                <Typography
+                  variant="h6"
+                  component="h2"
+                >
+                  文字列を取得
+                </Typography>
+                <OutputArea
+                  text={text}
+                  rows={10}
+                />
+              </Box>
+
+              <Box
+                mt={isMobile ? 0 : 2}
+                ml={isMobile ? 2 : 0}
+                display="flex"
+                justifyContent="flex-end"
+              >
+                <Button
+                  variant="outlined"
+                  startIcon={(
+                    <FileCopyOutlinedIcon
+                    />
+                  )}
+                  onClick={() => {
+                    copy(text);
+                  }}
+                >
+                  コピー
+                </Button>
+              </Box>
+            </Box>
+          </Box>
         </Main>
       </div>
     </ThemeProvider>
