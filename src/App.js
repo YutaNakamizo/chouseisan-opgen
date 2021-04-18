@@ -11,7 +11,8 @@ import '@fontsource/roboto';
 
 import { Header } from '~/components/Header';
 import { Main } from '~/components/Main';
-import { InputArea } from '~/components/InputArea';
+import { StepDate } from '~/components/StepDate';
+import { StepPresets } from '~/components/StepPresets';
 import { OutputArea } from '~/components/OutputArea';
 
 const theme = createMuiTheme({
@@ -23,7 +24,17 @@ const theme = createMuiTheme({
 });
 
 function App() {
+  const [ dailyOptions, setDailyOptions ] = useState([{
+    startTime: new Date(1970, 0, 1, 10, 30),
+    endTime: new Date(1970, 0, 1, 12, 0),
+    enabled: true,
+  }]);
   const [ text, setText ] = useState('');
+
+  const handleDailyOptionChange = options => {
+    console.log(options);
+    setDailyOptions(options);
+  };
 
   const startDateRef = useRef();
   const handleSDateChange = date => {
@@ -99,7 +110,12 @@ function App() {
 
         <Main
         >
-          <InputArea
+          <StepPresets
+            options={dailyOptions}
+            onChange={handleDailyOptionChange}
+          />
+
+          <StepDate
             onSDateChange={handleSDateChange}
             onEDateChange={handleEDateChange}
           />

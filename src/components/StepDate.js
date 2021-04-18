@@ -24,7 +24,7 @@ class ExDateFnsUtils extends DateFnsUtils {
   }
 };
 
-export const InputArea = ({
+export const StepDate = ({
   onSDateChange = function() {},
   onEDateChange = function() {},
   ...props
